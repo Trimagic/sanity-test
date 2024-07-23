@@ -16,6 +16,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
           name: "slug",
           type: "slug",
           title: "Slug of your blog article",
+          options: {
+            source: "title",
+          },
         },
         {
           name: "titleImage",
@@ -34,9 +37,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
           of: [
             {
               type: "block",
-            },
-            {
-              type: "image",
             },
           ],
         },
