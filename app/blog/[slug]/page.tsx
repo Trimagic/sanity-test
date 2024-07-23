@@ -42,7 +42,7 @@ export default async function BlogArticle({ params }: { params: { slug: string }
         className="rounded-lg mt-8 border"
       />
 
-      <div className="mt-16 prose prose-red prose-xl dark:prose-invert prose-li:marker:text-primary prose-a:text-primary">
+      <div className="mt-16 prose prose-red prose-lg dark:prose-invert prose-li:marker:text-primary prose-a:text-primary">
         <PortableText value={data.Content} />
       </div>
     </div>
