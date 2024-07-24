@@ -22,7 +22,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <Navbar />
-          <main className="max-w-2xl mx-auto px-4">{children}</main>
+          <main>{children}</main>
         </ThemeProvider>
       </body>
     </html>
