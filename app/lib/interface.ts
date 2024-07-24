@@ -9,6 +9,7 @@ export interface SimpleBlogCard {
 
 export interface FullBlog {
   currentSlug: string
+  smallDescription: string
   title: string
   Content: any
   titleImage: SanityImageSource

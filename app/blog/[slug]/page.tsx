@@ -1,6 +1,7 @@
 import { FullBlog } from "@/app/lib/interface"
 import { client } from "@/sanity/lib/client"
 import { urlFor } from "@/sanity/lib/image"
+import { Metadata } from "next"
 import { PortableText } from "next-sanity"
 import Image from "next/image"
 
@@ -10,6 +11,7 @@ async function getData(slug: string) {
   const query = `
     *[_type == "blog" && slug.current == '${slug}'] {
       "currentSlug": slug.current,
+      smallDescription,
       title,
       Content,
       titleImage
@@ -18,6 +20,31 @@ async function getData(slug: string) {
 
   const data = await client.fetch(query)
   return data
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string }
+}): Promise<Metadata> {
+  const data: FullBlog = await getData(params.slug)
+  return {
+    title: data.title,
+    description: data.smallDescription,
+    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || ""),
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "default",
+      title: data.title,
+      // startUpImage: [],
+    },
+    openGraph: {
+      siteName: "Blog",
+      type: "website",
+      title: data.title,
+      images: [urlFor(data.titleImage).url()],
+    },
+  }
 }
 
 export default async function BlogArticle({ params }: { params: { slug: string } }) {
